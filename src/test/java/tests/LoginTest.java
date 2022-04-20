@@ -15,7 +15,6 @@ public class LoginTest extends TestBase {
         driver.get(BASE_URL);
         loginPage.login();
         Assert.assertEquals(true, loginPage.findElementByText("Plans").isDisplayed());
-
     }
 
 

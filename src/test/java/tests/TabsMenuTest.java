@@ -2,7 +2,10 @@ package tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 import pages.TabsMenuPage;
 
 import static utils.Constants.BASE_URL;
@@ -11,6 +14,13 @@ public class TabsMenuTest extends TestBase {
 
     private String [] tabs = new String [] {"Plans", "Keywords", "Parameters", "Executions", "Scheduler", "Grid", "Admin"};
     private String [] visibleElements = new String[] {"New plan", "New keyword", "New parameter", "Execution list", "New task", "Agents", "Add user"};
+
+    @BeforeTest
+    public void authenticate() {
+        LoginPage loginPage = new LoginPage(driver);
+        driver.get(BASE_URL);
+        loginPage.login();
+    }
 
     @Test
     public void validateTabsMenu() {

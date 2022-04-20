@@ -1,26 +1,9 @@
 package tests;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-import pages.LoginPage;
-import org.testng.annotations.Test;
-import pages.TabsMenuPage;
-
-import static utils.Constants.*;
-
-public class TestSuiteExampleTest extends TestBase {
-    private TabsMenuPage tabsMenuPage;
-
-
-    @Test(priority = 0)
-    public void authenticate() {
-        LoginPage loginPage = new LoginPage(driver);
-        driver.get(BASE_URL);
-        loginPage.login();
-        tabsMenuPage = new TabsMenuPage(driver);
-    }
-
-    @Test(priority = 1)
-    public void validateTabs() {
-       //
-    }
+@RunWith(Suite.class)
+@Suite.SuiteClasses({LoginTest.class, TabsMenuTest.class})
+public class TestSuiteExampleTest {
 }
