@@ -1,9 +1,9 @@
 package tests;
 
 
-import org.testng.Assert;
+import org.junit.Assert;
 import pages.LoginPage;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static utils.Constants.*;
 
