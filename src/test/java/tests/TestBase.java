@@ -49,13 +49,13 @@ abstract class TestBase {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.navigate().to(GOOGLE_BASE_URL);
+            driver.navigate().to(BASE_URL);
             driver.manage().deleteAllCookies();
         } else if(browser.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
-            driver.navigate().to(FIREFOX_BASE_URL);
+            driver.navigate().to(BASE_URL);
             driver.manage().deleteAllCookies();
         }
 

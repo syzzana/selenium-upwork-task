@@ -5,23 +5,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class BrowserPage extends  AbstractPage{
+public class BrowserPage extends AbstractPage {
 
     @FindBy(css = "[name='q']")
-    private WebElement searchBar;
-    @FindBy(css = "[aria-label='Google Search']")
-    private WebElement googleSearch;
+    private WebElement googleSearchBar;
 
+    @FindBy(css = "[aria-label='Search with Google or enter address']")
+    private WebElement firefoxSearchBar;
 
     public BrowserPage(WebDriver driver) {
         super(driver);
     }
 
-   public void searchForKeyword(String keyword) {
-        waitForElementVisibility(searchBar, 10);
-        searchBar.sendKeys(keyword);
-        searchBar.sendKeys(Keys.ENTER);
-//        waitForElementVisibility(googleSearch, 5);
-//        googleSearch.click();
-   }
+    public void searchForKeywordOnChrome(String keyword) {
+        waitForElementVisibility(googleSearchBar, 10);
+        googleSearchBar.sendKeys(keyword);
+        googleSearchBar.sendKeys(Keys.ENTER);
+    }
+
+    public void searchForKeywordOnFirefox(String keyword) {
+        waitForElementVisibility(firefoxSearchBar, 30);
+        firefoxSearchBar.sendKeys(keyword);
+        firefoxSearchBar.sendKeys(Keys.ENTER);
+    }
 }
