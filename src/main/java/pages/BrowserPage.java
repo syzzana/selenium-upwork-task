@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static utils.Constants.*;
 
-public class LoginPage extends  AbstractPage{
+public class BrowserPage extends  AbstractPage{
 
     @FindBy(css = "[name='username']")
     private WebElement username;
@@ -17,7 +17,7 @@ public class LoginPage extends  AbstractPage{
     private WebElement login;
 
 
-    public LoginPage(WebDriver driver) {
+    public BrowserPage(WebDriver driver) {
         super(driver);
     }
 
