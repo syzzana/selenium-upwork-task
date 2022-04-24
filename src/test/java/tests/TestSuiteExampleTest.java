@@ -6,4 +6,5 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({BrowserTest.class})
 public class TestSuiteExampleTest {
+
 }

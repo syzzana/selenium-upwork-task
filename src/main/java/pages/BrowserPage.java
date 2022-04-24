@@ -1,52 +1,27 @@
 package pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static utils.Constants.*;
-
 public class BrowserPage extends  AbstractPage{
 
-    @FindBy(css = "[name='username']")
-    private WebElement username;
-    @FindBy(css="[name='password']")
-    private WebElement password;
-
-    @FindBy(xpath = "//*[contains(text(),'Login']")
-    private WebElement login;
+    @FindBy(css = "[name='q']")
+    private WebElement searchBar;
+    @FindBy(css = "[aria-label='Google Search']")
+    private WebElement googleSearch;
 
 
     public BrowserPage(WebDriver driver) {
         super(driver);
     }
 
-    public WebElement getPassword() {
-        return password;
-    }
-
-    public WebElement getUsername() {
-        return username;
-    }
-
-    public void submit() {
-        waitForElementVisibility(login,5);
-        login.click();
-    }
-
-    public void fillEmailOrUsername(final String emailAddress) {
-        waitForElementVisibility(username,5);
-        username.sendKeys(emailAddress);
-    }
-
-    public void fillPassword(final String pass) {
-        waitForElementVisibility(password,5);
-        password.sendKeys(pass);
-    }
-
-    public void login(){
-        fillEmailOrUsername(USERNAME);
-        fillPassword(PASSWORD);
-        submit();
-    }
+   public void searchForKeyword(String keyword) {
+        waitForElementVisibility(searchBar, 10);
+        searchBar.sendKeys(keyword);
+        searchBar.sendKeys(Keys.ENTER);
+//        waitForElementVisibility(googleSearch, 5);
+//        googleSearch.click();
+   }
 }

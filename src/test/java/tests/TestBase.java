@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Collection;
 
 import static org.junit.runners.Parameterized.*;
-import static utils.Constants.BASE_URL;
+import static utils.Constants.*;
 
 abstract class TestBase {
 
@@ -30,6 +30,8 @@ abstract class TestBase {
     public String browserVersion;
     @Parameter(0)
     public String browser;
+    @Parameter(3)
+    public String keyword;
     //no need when we setup remote driver
 //    @BeforeClass
 //    public static void setupSuite() {
@@ -47,13 +49,13 @@ abstract class TestBase {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.navigate().to(BASE_URL);
+            driver.navigate().to(GOOGLE_BASE_URL);
             driver.manage().deleteAllCookies();
         } else if(browser.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
-            driver.navigate().to(BASE_URL);
+            driver.navigate().to(FIREFOX_BASE_URL);
             driver.manage().deleteAllCookies();
         }
 
@@ -94,11 +96,12 @@ abstract class TestBase {
         driver = new RemoteWebDriver(url, browserOptions);
     }
 
-    @Parameters(name = "{0}, {1}")
+    @Parameters(name = "{0}, {1}, {2}, {4}")
     public static Collection<Object> crossBrowserData() {
         return Arrays.asList(new Object[][]{
-                {"chrome", "windows 11", "latest"},
-                {"firefox", "windows 11", "latest"}
+                {"chrome", "windows 11", "latest", "automation"},
+                {"firefox", "windows 11", "latest", "automation"}
         });
     }
+
 }

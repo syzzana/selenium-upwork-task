@@ -1,6 +1,7 @@
 package tests;
 
 
+import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,11 +14,14 @@ import static utils.Constants.*;
 public class BrowserTest extends TestBase {
 
     @Test
-    public void verifyLogin()  {
-        BrowserPage loginPage = new BrowserPage(driver);
-        driver.get(BASE_URL);
-        loginPage.login();
-        Assert.assertEquals(true, loginPage.findElementByText("Plans").isDisplayed());
+    public void searchForKeyword()  {
+        BrowserPage browserPage = new BrowserPage(driver);
+        if(this.browser.equalsIgnoreCase("chrome")) {
+            driver.get(GOOGLE_BASE_URL);
+            browserPage.searchForKeyword(keyword);
+        } else if(this.browser.equalsIgnoreCase("firefox")){
+            driver.get(FIREFOX_BASE_URL);
+        }
     }
 
 
