@@ -10,6 +10,7 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.BeforeClass;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -44,19 +45,24 @@ abstract class TestBase {
 //    }
 
     @Before
-    public void setup() {
+    public void setup() throws InterruptedException {
         if(browser.equalsIgnoreCase("chrome")) {
+//            ChromeOptions options = new ChromeOptions();
+//            options.setAcceptInsecureCerts(true);
+//            options.addArguments("user-data-dir=USER_DATA_PATH");
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(); //
+//            driver = new ChromeDriver(options);
             driver.manage().window().maximize();
-            driver.navigate().to(BASE_URL);
+            driver.wait(5000);
             driver.manage().deleteAllCookies();
+            driver.navigate().to(BASE_URL);
         } else if(browser.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
-            driver.navigate().to(BASE_URL);
             driver.manage().deleteAllCookies();
+            driver.navigate().to(BASE_URL);
         }
 
 //        createDriver();
