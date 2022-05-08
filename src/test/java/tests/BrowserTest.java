@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pages.BrowserPage;
@@ -26,7 +27,6 @@ public class BrowserTest extends TestBase {
         browserPage.printFirst10SearchResults(map);
     }
 
-//    @Test
 //    @AfterClass
 //    public static void compareResultsFromAllBrowsers() {
 //

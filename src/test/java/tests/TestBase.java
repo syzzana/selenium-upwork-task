@@ -9,8 +9,6 @@ import org.junit.rules.TestName;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.BeforeClass;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -19,8 +17,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 
-import static org.junit.runners.Parameterized.*;
-import static utils.Constants.*;
+import static org.junit.runners.Parameterized.Parameter;
+import static org.junit.runners.Parameterized.Parameters;
+import static utils.Constants.BASE_URL;
 
 abstract class TestBase {
 
