@@ -1,14 +1,11 @@
 package tests;
 
-import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import pages.BrowserPage;
 import org.junit.Test;
 import utils.SearchResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +13,7 @@ import static utils.Constants.*;
 
 @RunWith(Parameterized.class)
 public class BrowserTest extends TestBase {
-    Map<String, List<SearchResult>> map = new HashMap<>();
-    List<SearchResult> searchResults = new ArrayList<>();
+    Map<String, List<SearchResult>> map;
 
 
     @Test
@@ -26,7 +22,7 @@ public class BrowserTest extends TestBase {
         driver.get(BASE_URL);
         browserPage.searchForKeywordOnChrome(keyword);
         driver.wait(5000);
-        browserPage.parseSearchResults(searchResults, map, keyword);
+        map = browserPage.getSearchResults(keyword);
         browserPage.printFirst10SearchResults(map);
     }
 
@@ -35,6 +31,5 @@ public class BrowserTest extends TestBase {
 //    public static void compareResultsFromAllBrowsers() {
 //
 //    }
-
 
 }

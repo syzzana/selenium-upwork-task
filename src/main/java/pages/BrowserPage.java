@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import utils.SearchResult;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BrowserPage extends AbstractPage {
 
@@ -21,7 +22,6 @@ public class BrowserPage extends AbstractPage {
     private By desc;
 
 
-
     public BrowserPage(WebDriver driver) {
         super(driver);
     }
@@ -32,24 +32,29 @@ public class BrowserPage extends AbstractPage {
         searchBar.sendKeys(Keys.ENTER);
     }
 
-    public void parseSearchResults(List<SearchResult> searchResults, Map<String, List<SearchResult>> mapResults, String keyword) {
+    public Map<String, List<SearchResult>> getSearchResults(String keyword) {
+        Map<String, List<SearchResult>> searchResultsByKeyword = new HashMap<>();
         List<WebElement> list = driver.findElements(By.cssSelector("div.jtfYYd"));
 
-        for (int i = 0; i < list.size(); i++) {
-            WebElement url = list.get(0).findElement(this.url);
-            WebElement title = list.get(0).findElement(this.title);
-            WebElement desc = list.get(0).findElement(this.desc);
+        searchResultsByKeyword.put(keyword, parseSearchResults(list));
+        return searchResultsByKeyword;
+    }
+
+    private List<SearchResult> parseSearchResults(List<WebElement> list) {
+        return list.stream().map(webElement -> {
+            WebElement url = webElement.findElement(this.url);
+            WebElement title = webElement.findElement(this.title);
+            WebElement desc = webElement.findElement(this.desc);
 //            WebElement url = list.get(0).findElement(By.cssSelector("div.jtfYYd div.yuRUbf a"));
 //            WebElement title = list.get(0).findElement(By.cssSelector("div.jtfYYd div.yuRUbf a h3"));
 //            WebElement desc = list.get(0).findElement(By.cssSelector("div.jtfYYd div.NJo7tc div.VwiC3b span"));
-            SearchResult searchResult = SearchResult.builder()
+            return SearchResult.builder()
                     .url(url.getText())
                     .title(title.getText())
                     .desc(desc.getText())
                     .build();
-            searchResults.add(searchResult);
-        }
-        mapResults.put(keyword, searchResults);
+        }).collect(Collectors.toList());
+
     }
 
     public void printFirst10SearchResults(Map<String, List<SearchResult>> map) {
